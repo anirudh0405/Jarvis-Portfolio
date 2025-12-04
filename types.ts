@@ -1,3 +1,4 @@
+
 export interface Project {
   id: string;
   title: string;
@@ -27,6 +28,7 @@ export enum Section {
   PROJECTS = 'PROJECTS',
   EXPERIENCE = 'EXPERIENCE',
   SKILLS = 'SKILLS',
+  SUITS = 'SUITS',
 }
 
 export interface ChatMessage {

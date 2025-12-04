@@ -1,7 +1,7 @@
 import React from 'react';
 
 // --- Decorative Arc Reactor / Circle ---
-export const ArcCircle = ({ className = "" }: { className?: string }) => (
+export const ArcCircle: React.FC<{ className?: string }> = ({ className = "" }) => (
   <div className={`rounded-full border border-cyan-500/30 relative flex items-center justify-center ${className}`}>
     <div className="absolute inset-0 rounded-full border-t border-cyan-400 animate-spin-slow"></div>
     <div className="absolute inset-2 rounded-full border-b border-cyan-400/50 animate-spin-reverse-slow"></div>
@@ -9,7 +9,7 @@ export const ArcCircle = ({ className = "" }: { className?: string }) => (
 );
 
 // --- Jarvis / Arc Reactor Logo ---
-export const JarvisLogo = ({ className = "", size = 24 }: { className?: string, size?: number }) => (
+export const JarvisLogo: React.FC<{ className?: string, size?: number }> = ({ className = "", size = 24 }) => (
   <svg 
     width={size} 
     height={size} 
@@ -42,7 +42,7 @@ export const JarvisLogo = ({ className = "", size = 24 }: { className?: string, 
 );
 
 // --- Section Header ---
-export const HudHeader = ({ title, subtitle }: { title: string, subtitle?: string }) => (
+export const HudHeader: React.FC<{ title: string, subtitle?: string }> = ({ title, subtitle }) => (
   <div className="mb-8 relative pl-6 border-l-4 border-cyan-500">
     <h2 className="text-4xl font-hud font-bold text-cyan-400 uppercase tracking-widest hud-text-shadow">
       {title}
@@ -58,7 +58,7 @@ export const HudHeader = ({ title, subtitle }: { title: string, subtitle?: strin
 );
 
 // --- Tech Card ---
-export const TechCard = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
+export const TechCard: React.FC<{ children?: React.ReactNode, className?: string }> = ({ children, className = "" }) => (
   <div className={`relative bg-slate-900/40 backdrop-blur-md border border-cyan-500/20 p-6 overflow-hidden group hover:border-cyan-400/50 transition-colors duration-300 ${className}`}>
     {/* Corner accents */}
     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-400"></div>
@@ -74,7 +74,7 @@ export const TechCard = ({ children, className = "" }: { children: React.ReactNo
 );
 
 // --- Button ---
-export const GlowButton = ({ onClick, children, active = false }: { onClick: () => void, children: React.ReactNode, active?: boolean }) => (
+export const GlowButton: React.FC<{ onClick: () => void, children: React.ReactNode, active?: boolean }> = ({ onClick, children, active = false }) => (
   <button
     onClick={onClick}
     className={`

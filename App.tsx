@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
-  Terminal, User, Code, Briefcase, Zap, Cpu, Battery, Wifi, Activity
+  Terminal, User, Code, Briefcase, Zap, Cpu, Battery, Wifi, Activity, Shield
 } from 'lucide-react';
 import { Section } from './types';
 import { PORTFOLIO_DATA, PROJECTS, EXPERIENCE, SKILLS } from './constants';
@@ -9,6 +10,7 @@ import { JarvisChat } from './components/JarvisChat';
 import { BackgroundVis } from './components/BackgroundVis';
 import { LoadingScreen } from './components/LoadingScreen';
 import { BentoHome } from './components/BentoHome';
+import { SuitsShowcase } from './components/SuitsShowcase';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
 // --- Sub-components for Sections ---
@@ -151,6 +153,7 @@ export default function App() {
       case Section.PROJECTS: return <ProjectsSection />;
       case Section.EXPERIENCE: return <ExperienceSection />;
       case Section.SKILLS: return <SkillsSection />;
+      case Section.SUITS: return <SuitsShowcase />;
       case Section.ABOUT: 
         return (
              <div className="max-w-3xl animate-fade-in">
@@ -191,13 +194,17 @@ export default function App() {
         
         {/* Sidebar / Nav */}
         <nav className="w-full md:w-24 border-b md:border-b-0 md:border-r border-cyan-900/50 bg-slate-950/80 backdrop-blur-sm flex md:flex-col items-center justify-between p-4 md:py-8 z-50">
-           <div className="mb-0 md:mb-8 animate-spin-slow">
+           <div 
+             className="mb-0 md:mb-8 animate-spin-slow cursor-pointer hover:scale-110 transition-transform"
+             onClick={() => changeSection(Section.HOME)}
+           >
               <Cpu className="text-cyan-400" size={32} />
            </div>
 
            <div className="flex md:flex-col gap-6 md:gap-8 overflow-x-auto md:overflow-visible">
               {[
                 { id: Section.HOME, icon: Terminal, label: 'SYS' },
+                { id: Section.SUITS, icon: Shield, label: 'ARMOR' },
                 { id: Section.ABOUT, icon: User, label: 'BIO' },
                 { id: Section.SKILLS, icon: Zap, label: 'PWR' },
                 { id: Section.PROJECTS, icon: Code, label: 'PRJ' },
@@ -247,7 +254,7 @@ export default function App() {
 
            <div className="max-w-6xl mx-auto">
              <HudHeader 
-                title={activeSection === Section.HOME ? "SYSTEM DASHBOARD" : activeSection} 
+                title={activeSection === Section.HOME ? "SYSTEM DASHBOARD" : activeSection === Section.SUITS ? "HALL OF ARMOR" : activeSection} 
                 subtitle={`ACCESSING ${activeSection} DATABASE...`}
              />
              <div className="min-h-[400px]">

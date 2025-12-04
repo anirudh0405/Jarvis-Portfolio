@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { JarvisLogo } from './HudComponents';
 
 export const LoadingScreen = () => {
   const [log, setLog] = useState<string[]>([]);
   
   const messages = [
     "INITIALIZING SYSTEM...",
-    "POWERING ARC REACTOR...",
-    "LOADING NEURAL NETWORK...",
-    "CALIBRATING SENSORS...",
-    "ESTABLISHING SECURE CONNECTION...",
-    "ACCESS GRANTED."
+    "LOADING PROTOCOLS...",
+    "CONNECTING TO SATELLITE...",
+    "RENDERING HOLOGRAMS...",
+    "BIOMETRICS VERIFIED..."
   ];
 
   useEffect(() => {
@@ -21,67 +21,42 @@ export const LoadingScreen = () => {
       } else {
         clearInterval(interval);
       }
-    }, 150);
+    }, 200);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="fixed inset-0 bg-slate-950 z-[100] flex flex-col items-center justify-center">
-      {/* Detailed Arc Reactor Animation */}
-      <div className="relative w-40 h-40 mb-12 flex items-center justify-center">
+      {/* Container for the logo */}
+      <div className="relative w-48 h-48 mb-8 flex items-center justify-center">
         
         {/* Glow Background */}
-        <div className="absolute w-full h-full bg-cyan-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute w-32 h-32 bg-cyan-500/20 rounded-full blur-2xl animate-pulse"></div>
 
-        {/* Outer Casing Ring */}
-        <div className="absolute inset-0 rounded-full border-[6px] border-slate-800 shadow-[0_0_15px_rgba(6,182,212,0.5)]"></div>
+        {/* Spinning Outer Ring (Custom decorative) */}
+        <div className="absolute inset-0 border-2 border-dashed border-cyan-800 rounded-full animate-spin-slow"></div>
+        <div className="absolute inset-4 border border-cyan-900 rounded-full animate-spin-reverse-slow"></div>
 
-        {/* The Reactor Ring (Segmented) */}
-        <div className="absolute inset-2 rounded-full border border-cyan-900 bg-slate-900 flex items-center justify-center">
-             {/* Creating the "Coils" using conic-gradient mask or individual elements. Using individual divs for rotation. */}
-             {[...Array(10)].map((_, i) => (
-               <div 
-                 key={i}
-                 className="absolute w-3 h-10 bg-gradient-to-b from-cyan-100 to-cyan-500 shadow-[0_0_10px_cyan]"
-                 style={{ 
-                   transform: `rotate(${i * 36}deg) translateY(-28px)`,
-                   transformOrigin: 'bottom center',
-                   width: '18px',
-                   height: '14px',
-                   borderRadius: '2px',
-                   opacity: 0.9
-                 }}
-               ></div>
-             ))}
-             
-             {/* Inner Ring holding the coils */}
-             <div className="absolute inset-8 rounded-full border-[4px] border-slate-700 bg-transparent z-10"></div>
+        {/* THE JARVIS LOGO - Spinning */}
+        <div className="animate-spin" style={{ animationDuration: '3s' }}>
+           <JarvisLogo size={120} className="text-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
         </div>
-
-        {/* Center Core */}
-        <div className="absolute w-12 h-12 bg-white rounded-full shadow-[0_0_30px_cyan] z-20 animate-pulse border-4 border-cyan-200">
-           <div className="absolute inset-0 bg-cyan-400 blur-sm rounded-full animate-pulse"></div>
-        </div>
-        
-        {/* Spinning decorative overlay */}
-        <div className="absolute inset-0 rounded-full border border-cyan-500/30 border-dashed animate-spin-slow"></div>
-
       </div>
       
-      <div className="w-64 h-1 bg-cyan-900 rounded-full overflow-hidden mb-4">
-        <div className="h-full bg-cyan-400 animate-[width_1s_ease-out_forwards]" style={{ width: '0%', animationName: 'loading-bar', animationDuration: '1.2s', animationFillMode: 'forwards' }}></div>
+      {/* Loading Bar */}
+      <div className="w-64 h-1 bg-cyan-900/50 rounded-full overflow-hidden mb-4 relative">
+         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400 to-transparent w-1/2 animate-[shimmer_1s_infinite] translate-x-[-100%]"></div>
+         <style>{`
+            @keyframes shimmer {
+                100% { transform: translateX(200%); }
+            }
+         `}</style>
       </div>
-      <style>{`
-        @keyframes loading-bar {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-      `}</style>
 
-      <div className="font-mono-tech text-cyan-400 text-xs h-24 overflow-hidden flex flex-col items-center">
+      <div className="font-mono-tech text-cyan-500 text-xs h-24 overflow-hidden flex flex-col items-center gap-1">
         {log.map((msg, idx) => (
-          <div key={idx} className="opacity-80">{msg}</div>
+          <div key={idx} className="animate-fade-in">{msg}</div>
         ))}
       </div>
     </div>

@@ -1,128 +1,151 @@
-import React from 'react';
-import { PORTFOLIO_DATA, PROJECTS, EXPERIENCE } from '../constants';
-import { TechCard, ArcCircle } from './HudComponents';
-import { Github, Linkedin, MapPin, Cpu, ArrowRight } from 'lucide-react';
-import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
 
-// Dummy data for CPU chart
-const systemData = Array.from({ length: 20 }, (_, i) => ({
-  time: i,
-  load: 40 + Math.random() * 30,
-}));
+import React from 'react';
+import { PORTFOLIO_DATA, PROJECTS, EXPERIENCE, SKILLS } from '../constants';
+import { ArcCircle, JarvisLogo } from './HudComponents';
+import { Wifi, Battery, Activity, Shield, Cpu, ChevronRight } from 'lucide-react';
 
 export const BentoHome = ({ onNavigate }: { onNavigate: (section: string) => void }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-3 gap-4 h-full min-h-[600px] animate-fade-in">
+    <div className="relative w-full min-h-[600px] flex flex-col justify-between p-2 md:p-6 overflow-hidden rounded-lg border border-cyan-500/10 bg-slate-950/30 animate-fade-in">
       
-      {/* 1. Profile / Hero - Large Tile */}
-      <div className="col-span-1 md:col-span-2 md:row-span-2">
-        <TechCard className="h-full flex flex-col justify-between bg-gradient-to-br from-slate-900/80 to-cyan-950/30">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <ArcCircle className="w-12 h-12" />
-              <div className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded text-xs font-mono-tech text-cyan-300">
-                STATUS: ONLINE
-              </div>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-hud font-bold text-white mb-2">
+      {/* --- Decorative Background Layer --- */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+         {/* Connecting Lines */}
+         <svg className="w-full h-full opacity-30">
+            <defs>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="transparent" />
+                <stop offset="50%" stopColor="#06b6d4" />
+                <stop offset="100%" stopColor="transparent" />
+              </linearGradient>
+            </defs>
+            {/* Lines from Center to Corners */}
+            <line x1="50%" y1="50%" x2="15%" y2="15%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="5 5" />
+            <line x1="50%" y1="50%" x2="85%" y2="15%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="5 5" />
+            <line x1="50%" y1="50%" x2="15%" y2="85%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="5 5" />
+            <line x1="50%" y1="50%" x2="85%" y2="85%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="5 5" />
+            
+            {/* Concentric Circles around center */}
+            <circle cx="50%" cy="50%" r="180" stroke="#06b6d4" strokeWidth="0.5" fill="none" opacity="0.3" />
+            <circle cx="50%" cy="50%" r="250" stroke="#06b6d4" strokeWidth="0.5" strokeDasharray="20 10" fill="none" opacity="0.1" className="animate-spin-slow" style={{ animationDuration: '60s' }} />
+         </svg>
+      </div>
+
+      {/* --- Top Row: Identity & Status --- */}
+      <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-6">
+         
+         {/* Identity Module */}
+         <div className="bg-gradient-to-r from-slate-900/80 to-transparent border-l-4 border-cyan-400 pl-6 py-4 pr-12 backdrop-blur-sm clip-path-slant-right">
+            <div className="text-cyan-500 font-mono-tech text-xs tracking-[0.2em] mb-1">SUBJECT_ID: 0405</div>
+            <h1 className="text-4xl md:text-6xl font-hud text-white tracking-tighter drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">
               {PORTFOLIO_DATA.name.toUpperCase()}
             </h1>
-            <p className="text-xl text-cyan-400 font-tech tracking-wider">
-              {PORTFOLIO_DATA.role}
-            </p>
-          </div>
-          <div className="mt-6">
-            <p className="font-mono-tech text-cyan-200/70 text-sm leading-relaxed mb-6">
-              {PORTFOLIO_DATA.tagline}
-            </p>
-            <button 
-              onClick={() => onNavigate('ABOUT')}
-              className="group flex items-center gap-2 text-cyan-400 font-hud text-sm hover:text-white transition-colors"
-            >
-              INITIALIZE PROTOCOL <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </TechCard>
+            <div className="flex items-center gap-3 mt-2">
+               <span className="h-2 w-2 bg-cyan-400 rounded-full animate-blink shadow-[0_0_8px_cyan]"></span>
+               <p className="font-tech text-cyan-100 text-lg tracking-widest">{PORTFOLIO_DATA.role}</p>
+            </div>
+         </div>
+
+         {/* System Status Module */}
+         <div className="hidden md:flex flex-col items-end space-y-2">
+            <div className="flex items-center gap-4 bg-slate-900/50 px-4 py-2 border border-cyan-500/20 rounded">
+                <div className="text-right">
+                    <div className="text-[10px] text-cyan-500 font-mono-tech">NET_STATUS</div>
+                    <div className="text-sm text-cyan-300 font-bold">CONNECTED</div>
+                </div>
+                <Wifi size={20} className="text-cyan-400" />
+            </div>
+            <div className="flex items-center gap-4 bg-slate-900/50 px-4 py-2 border border-cyan-500/20 rounded">
+                <div className="text-right">
+                    <div className="text-[10px] text-cyan-500 font-mono-tech">CORE_TEMP</div>
+                    <div className="text-sm text-cyan-300 font-bold">NORMAL</div>
+                </div>
+                <Activity size={20} className="text-green-400" />
+            </div>
+         </div>
       </div>
 
-      {/* 2. System Status / CPU - Medium Tile */}
-      <div className="col-span-1 md:col-span-2 md:row-span-1">
-        <TechCard className="h-full">
-           <div className="flex justify-between items-center mb-2">
-              <h3 className="text-cyan-400 font-mono-tech text-xs flex items-center gap-2">
-                <Cpu size={14} /> SYSTEM LOAD
-              </h3>
-              <span className="text-xs text-cyan-600 animate-pulse">LIVE</span>
-           </div>
-           <div className="h-24 w-full">
-             <ResponsiveContainer width="100%" height="100%">
-               <LineChart data={systemData}>
-                 <Line type="monotone" dataKey="load" stroke="#06b6d4" strokeWidth={2} dot={false} isAnimationActive={true} />
-                 <XAxis hide />
-                 <YAxis hide domain={[0, 100]} />
-                 <Tooltip 
-                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #06b6d4', color: '#fff' }} 
-                    itemStyle={{ color: '#22d3ee' }}
-                    labelStyle={{ display: 'none' }}
-                 />
-               </LineChart>
-             </ResponsiveContainer>
-           </div>
-        </TechCard>
+      {/* --- Center Row: The Reactor Core --- */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+         <div 
+            className="group relative cursor-pointer"
+            onClick={() => onNavigate('SUITS')}
+         >
+            {/* Outer Rotating Ring */}
+            <div className="absolute inset-[-40px] rounded-full border border-dashed border-cyan-500/30 animate-spin-slow group-hover:animate-spin" style={{ animationDuration: '20s' }}></div>
+            <div className="absolute inset-[-20px] rounded-full border border-cyan-500/20 animate-spin-reverse-slow" style={{ animationDuration: '15s' }}></div>
+            
+            {/* Main Reactor Body */}
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-slate-950/80 backdrop-blur-xl border-2 border-cyan-400/50 flex flex-col items-center justify-center relative shadow-[0_0_50px_rgba(6,182,212,0.15)] group-hover:shadow-[0_0_80px_rgba(6,182,212,0.4)] transition-all duration-500">
+                
+                {/* Inner Glow */}
+                <div className="absolute inset-0 rounded-full bg-cyan-400/5 group-hover:bg-cyan-400/10 transition-colors"></div>
+                
+                {/* Logo */}
+                <JarvisLogo size={64} className="text-cyan-300 group-hover:text-white transition-colors duration-300 group-hover:scale-110 transform" />
+                
+                {/* Text */}
+                <div className="mt-4 text-center">
+                    <div className="text-cyan-400 font-hud text-sm tracking-[0.2em] group-hover:tracking-[0.3em] transition-all">INITIALIZE</div>
+                    <div className="text-cyan-700 text-[10px] font-mono-tech mt-1">HALL_OF_ARMOR</div>
+                </div>
+
+                {/* Decorative brackets around the circle */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-16 bg-slate-950 border-x border-cyan-500/50"></div>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4 h-16 bg-slate-950 border-x border-cyan-500/50"></div>
+                <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-16 bg-slate-950 border-y border-cyan-500/50"></div>
+                <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 h-4 w-16 bg-slate-950 border-y border-cyan-500/50"></div>
+            </div>
+         </div>
       </div>
 
-      {/* 3. Location - Small Tile */}
-      <div className="col-span-1 md:col-span-1 md:row-span-1">
-         <TechCard className="h-full flex flex-col justify-center items-center text-center group cursor-default">
-            <MapPin className="text-cyan-500 mb-2" size={24} />
-            <h4 className="font-hud text-white text-sm">BASE</h4>
-            <p className="font-mono-tech text-cyan-400 text-xs mt-1">{PORTFOLIO_DATA.location}</p>
-         </TechCard>
-      </div>
+      {/* --- Bottom Row: Data Modules --- */}
+      <div className="relative z-10 flex flex-col md:flex-row justify-between items-end gap-6 mt-32 md:mt-0">
+         
+         {/* Skills/Security Module (Bottom Left) */}
+         <div 
+            className="group bg-slate-900/60 border border-cyan-500/30 p-4 rounded-tr-2xl backdrop-blur-sm cursor-pointer hover:bg-slate-800/80 transition-all w-full md:w-64"
+            onClick={() => onNavigate('SKILLS')}
+         >
+             <div className="flex items-center justify-between mb-3 border-b border-cyan-500/20 pb-2">
+                 <span className="text-xs font-mono-tech text-cyan-400">SKILL_MATRIX</span>
+                 <Shield size={14} className="text-cyan-500" />
+             </div>
+             <div className="space-y-2">
+                 {SKILLS.slice(0, 3).map((skill, i) => (
+                     <div key={skill.name} className="flex items-center gap-2">
+                         <div className="text-[10px] text-cyan-200 w-16">{skill.name}</div>
+                         <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                             <div className="h-full bg-cyan-500/70 w-0 group-hover:w-full transition-all duration-1000 ease-out" style={{ width: `${skill.level}%` }}></div>
+                         </div>
+                         <div className="text-[10px] text-cyan-500">{skill.level}%</div>
+                     </div>
+                 ))}
+             </div>
+         </div>
 
-      {/* 4. Socials - Small Tile */}
-      <div className="col-span-1 md:col-span-1 md:row-span-1">
-         <TechCard className="h-full flex flex-col justify-center gap-3">
-            <a href={PORTFOLIO_DATA.socials.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-cyan-400 hover:text-white transition-colors">
-               <Github size={18} /> <span className="font-mono-tech text-xs">GITHUB</span>
-            </a>
-            <a href={PORTFOLIO_DATA.socials.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-cyan-400 hover:text-white transition-colors">
-               <Linkedin size={18} /> <span className="font-mono-tech text-xs">LINKEDIN</span>
-            </a>
-         </TechCard>
-      </div>
-
-      {/* 5. Latest Project - Wide Tile */}
-      <div className="col-span-1 md:col-span-2 md:row-span-1">
-        <div 
+         {/* Latest Mission Module (Bottom Right) */}
+         <div 
+            className="group relative bg-slate-900/60 border border-cyan-500/30 p-4 rounded-tl-2xl backdrop-blur-sm cursor-pointer hover:border-cyan-400 transition-all w-full md:w-80 text-right overflow-hidden"
             onClick={() => onNavigate('PROJECTS')}
-            className="relative h-full rounded border border-cyan-500/20 overflow-hidden group cursor-pointer"
-        >
-            <img src={PROJECTS[0].image} alt="Project" className="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
-            <div className="absolute bottom-4 left-4">
-                <p className="text-cyan-400 text-xs font-mono-tech mb-1">LATEST DEPLOYMENT</p>
-                <h3 className="text-white font-hud text-xl">{PROJECTS[0].title}</h3>
-            </div>
-            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowRight className="text-white" />
-            </div>
-        </div>
-      </div>
-
-      {/* 6. Stats - Remaining Space */}
-      <div className="col-span-1 md:col-span-2 md:row-span-1">
-          <TechCard className="h-full flex items-center justify-around">
-              <div className="text-center">
-                  <div className="text-3xl font-hud text-white font-bold">{EXPERIENCE.length}+</div>
-                  <div className="text-xs font-mono-tech text-cyan-500">YEARS EXP</div>
-              </div>
-              <div className="w-px h-10 bg-cyan-900"></div>
-              <div className="text-center">
-                  <div className="text-3xl font-hud text-white font-bold">{PROJECTS.length}</div>
-                  <div className="text-xs font-mono-tech text-cyan-500">PROJECTS</div>
-              </div>
-          </TechCard>
+         >
+             {/* Background Image Effect */}
+             <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+                <img src={PROJECTS[0].image} alt="Project BG" className="w-full h-full object-cover grayscale" />
+             </div>
+             <div className="relative z-10">
+                 <div className="flex items-center justify-end gap-2 mb-2">
+                    <span className="text-xs font-mono-tech text-cyan-400 blink">LATEST_DEPLOYMENT</span>
+                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                 </div>
+                 <h3 className="text-xl font-hud text-white mb-1 group-hover:text-cyan-300 transition-colors">{PROJECTS[0].title}</h3>
+                 <p className="text-xs text-cyan-200/60 font-tech line-clamp-2">{PROJECTS[0].description}</p>
+                 
+                 <div className="mt-3 flex justify-end items-center gap-1 text-cyan-500 text-xs font-mono-tech group-hover:gap-2 transition-all">
+                    VIEW_LOGS <ChevronRight size={12} />
+                 </div>
+             </div>
+         </div>
       </div>
 
     </div>
