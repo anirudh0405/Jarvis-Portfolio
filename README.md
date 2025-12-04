@@ -1,7 +1,8 @@
 # 🧠 JARVIS-Inspired Portfolio  
 ### A Futuristic Developer Interface Built with TypeScript
 
-![Jarvis Banner](./screenshots/banner.png)
+![Jarvis Banner](./screenshots/<img width="1919" height="1138" alt="Screenshot 2025-12-04 184005" src="https://github.com/user-attachments/assets/c6a3832c-b8d3-4c1b-8db5-acf3301a8b68" />
+)
 
 ## 🚀 Overview  
 This project is a **Jarvis-inspired portfolio website**, designed to replicate the futuristic UI style seen in *Iron Man*.  
@@ -19,7 +20,7 @@ Built by **Anirudh — Full Stack Engineer & AI Specialist**.
 - Animated graphs  
 - Holographic UI elements  
 
-![Dashboard Screenshot](./screenshots/dashboard.png)
+
 
 ---
 
@@ -28,7 +29,8 @@ Built by **Anirudh — Full Stack Engineer & AI Specialist**.
 - Animated progress bars  
 - Clean sci-fi styled layout  
 
-![Skills Screenshot](./screenshots/skills.png)
+![Skills Screenshot](./screenshots/<img width="1919" height="1136" alt="Screenshot 2025-12-04 184019" src="https://github.com/user-attachments/assets/b58858b0-674c-4172-8d36-829acd5d1289" />
+)
 
 ---
 
@@ -38,7 +40,8 @@ Built by **Anirudh — Full Stack Engineer & AI Specialist**.
 - Tech-tag badges  
 - Modular data-driven layout  
 
-![Projects Screenshot](./screenshots/projects.png)
+![Projects Screenshot](./screenshots/<img width="1919" height="1121" alt="Screenshot 2025-12-04 184035" src="https://github.com/user-attachments/assets/5b14b4d9-0196-4673-aedd-adc26ba0b97b" />
+)
 
 ---
 
@@ -54,6 +57,5 @@ Built by **Anirudh — Full Stack Engineer & AI Specialist**.
 
 ---
 
-## 📂 Project Structure
 
 
