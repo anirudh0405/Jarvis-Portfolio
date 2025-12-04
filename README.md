@@ -1,20 +1,59 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🧠 JARVIS-Inspired Portfolio  
+### A Futuristic Developer Interface Built with TypeScript
 
-# Run and deploy your AI Studio app
+![Jarvis Banner](./screenshots/banner.png)
 
-This contains everything you need to run your app locally.
+## 🚀 Overview  
+This project is a **Jarvis-inspired portfolio website**, designed to replicate the futuristic UI style seen in *Iron Man*.  
+It features interactive HUD panels, glowing neon elements, dynamic animations, and a dashboard-like interface for showcasing your skills and projects.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1-Hs8yfyZxF4lWDJrj2X3RT5hp6YdmtJt
+Built by **Anirudh — Full Stack Engineer & AI Specialist**.
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## ✨ Features  
+
+### 🛰️ System Dashboard  
+- Live status indicators  
+- Location & system meta display  
+- Animated graphs  
+- Holographic UI elements  
+
+![Dashboard Screenshot](./screenshots/dashboard.png)
+
+---
+
+### 🔧 Skills Database  
+- Radar chart visualization  
+- Animated progress bars  
+- Clean sci-fi styled layout  
+
+![Skills Screenshot](./screenshots/skills.png)
+
+---
+
+### 📁 Projects Terminal  
+- Futuristic project cards  
+- Hover/reactive animations  
+- Tech-tag badges  
+- Modular data-driven layout  
+
+![Projects Screenshot](./screenshots/projects.png)
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|---------|--------------|
+| **Frontend** | React, TypeScript |
+| **Styling** | TailwindCSS, Neon HUD Custom CSS |
+| **Charts** | Recharts / Chart.js |
+| **Build System** | Vite |
+| **Animations** | Framer Motion / CSS Keyframes |
+
+---
+
+## 📂 Project Structure
 
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
